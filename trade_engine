@@ -1,0 +1,67 @@
+# Trade Engine
+
+# A single player
+player = {
+    "id": "jjettas",
+    "name": "Justin Jefferson",
+    "position": "WR",
+    "team": "MIN",
+    "value": 95.0,  # VORP / trade value
+}
+
+# A roster (one fantasy team)
+roster_you = {
+    "QB": ["josh_allen"],
+    "RB": ["breece_hall", "james_cook"],
+    "WR": ["justin_jefferson", "puka_nacua"],
+    "TE": ["sam_laporta"],
+    "FLEX": ["raheem_mostert"],
+    "BENCH": ["random_guy_1", "random_guy_2"],
+}
+
+roster_them = { ... }  # same structure
+
+# A proposed trade
+trade = {
+    "you_send": ["puka_nacua"],
+    "you_receive": ["aj_brown"],
+}
+
+
+PLAYER_VALUES = {
+    "justin_jefferson": {"name": "Justin Jefferson", "position": "WR", "value": 95},
+    "puka_nacua": {"name": "Puka Nacua", "position": "WR", "value": 80},
+    "aj_brown": {"name": "A.J. Brown", "position": "WR", "value": 92},
+    "breece_hall": {"name": "Breece Hall", "position": "RB", "value": 90},
+    "raheem_mostert": {"name": "Raheem Mostert", "position": "RB", "value": 70},
+}
+
+
+def trade_score(you_send, you_receive, player_values):
+    send_value = sum(player_values[p]["value"] for p in you_send)
+    receive_value = sum(player_values[p]["value"] for p in you_receive)
+    diff = receive_value - send_value  # positive = good for you
+    return send_value, receive_value, diff
+
+def trade_verdict(diff, tolerance=5):
+    if diff > tolerance:
+        return "Good for you"
+    elif diff < -tolerance:
+        return "Bad for you"
+    else:
+        return "Fair"
+
+if __name__ == "__main__":
+    you_send = ["puka_nacua"]
+    you_receive = ["aj_brown"]
+
+    send, receive, diff = trade_score(you_send, you_receive, PLAYER_VALUES)
+    verdict = trade_verdict(diff)
+
+    print(f"You send: {send} value")
+    print(f"You receive: {receive} value")
+    print(f"Difference (receive - send): {diff}")
+    print(f"Verdict: {verdict}")
+
+
+
