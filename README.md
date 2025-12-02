@@ -2,6 +2,8 @@
 
 A local-first fantasy football trade analyzer that blends your custom league data with Yahoo valuations. Mock league rosters are built in, and Yahoo auth is used to pull live player values when available. Propose a trade, see a verdict, and get quick rationale with value deltas and positional impact.
 
+Right now my fantasy league is programmed into it for personal use, maybe in the future I can add a feature where you can add in your own league
+
 ## Highlights
 - Mock league support: run analysis without a live Yahoo league.
 - Yahoo-backed valuations: falls back to a heuristic if Yahoo isn’t available.
